@@ -303,6 +303,15 @@ img {
     font-weight: 900;
 }
 
+.section-heading > h3 {
+    font-weight: 100;
+    color: #bec0cc;
+    font-size: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 .section-heading > h5 {
     font-size: 22px;
     color: #abadbe;
