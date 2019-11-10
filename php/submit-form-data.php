@@ -17,4 +17,9 @@ mail("kpristavka@gmail.com","email from kpristavka.com php sctipt",$msg);
 
 fwrite($fp, $savestring);
 fclose($fp);
+
+if ($_POST) {
+    header("Location: " . $_SERVER['REQUEST_URI']);//redirects to the same page
+    exit();
+}
 ?>

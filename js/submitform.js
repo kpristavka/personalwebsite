@@ -21,7 +21,7 @@ function SubmitForm() {
             console.log("SubmitForm. Error...");
         }
     });
-
+ 
     var frm = document.getElementById("contact_form").reset();
 
     return false;
