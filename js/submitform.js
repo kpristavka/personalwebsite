@@ -22,5 +22,7 @@ function SubmitForm() {
         }
     });
 
+    var frm = document.getElementById("contact_form").reset();
+
     return false;
 }
