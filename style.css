@@ -290,7 +290,7 @@ img {
 
 .section-heading > p {
     font-weight: 700;
-    color: #bec0cc;
+    color: #404551;/*changed from bec0cc KPRISTAVKA*/
     font-size: 12px;
     margin-bottom: 10px;
     text-transform: uppercase;
