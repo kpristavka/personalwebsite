@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8" />
@@ -18,42 +18,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script>
-        // Apply saved theme (default dark) before first paint to avoid a flash
+        // Apply saved theme (default light) before first paint to avoid a flash
         (function () {
-            const themes = ["dark", "light", "terminal", "sunset"];
+            const themes = ["light", "dark", "terminal", "sunset"];
             let theme = null;
             try {
                 theme = localStorage.getItem("theme");
             } catch (e) { }
             if (!themes.includes(theme)) {
-                theme = "dark";
+                theme = "light";
             }
             document.documentElement.dataset.theme = theme;
         })();
     </script>
     <style>
-        /* Default: dark */
+        /* Light (also the fallback if no data-theme is set)*/
         :root,
-        [data-theme="dark"] {
-            color-scheme: dark;
-            --bg: #0b0d12;
-            --nav-bg: rgba(11, 13, 18, .78);
-            --surface: #12151d;
-            --surface-raised: #151923;
-            --border: #222733;
-            --border-card: #252b38;
-            --border-strong: #303746;
-            --text: #f5f7fb;
-            --text-hover: #ffffff;
-            --text-muted: #aeb6c7;
-            --text-card: #9fa8ba;
-            --text-subtle: #8f99ad;
-            --text-faint: #737d90;
-            --accent: #8ea2ff;
-            --glow-1: rgba(14, 165, 233, 0.15);
-            --glow-2: rgba(168, 85, 247, 0.12);
-        }
-
         [data-theme="light"] {
             color-scheme: light;
             --bg: #f6f7fa;
@@ -72,6 +52,26 @@
             --accent: #4553d6;
             --glow-1: rgba(14, 165, 233, 0.18);
             --glow-2: rgba(168, 85, 247, 0.14);
+        }
+
+        [data-theme="dark"] {
+            color-scheme: dark;
+            --bg: #0b0d12;
+            --nav-bg: rgba(11, 13, 18, .78);
+            --surface: #12151d;
+            --surface-raised: #151923;
+            --border: #222733;
+            --border-card: #252b38;
+            --border-strong: #303746;
+            --text: #f5f7fb;
+            --text-hover: #ffffff;
+            --text-muted: #aeb6c7;
+            --text-card: #9fa8ba;
+            --text-subtle: #8f99ad;
+            --text-faint: #737d90;
+            --accent: #8ea2ff;
+            --glow-1: rgba(14, 165, 233, 0.15);
+            --glow-2: rgba(168, 85, 247, 0.12);
         }
 
         [data-theme="terminal"] {
@@ -505,8 +505,8 @@
 
         // Theme switcher: cycles through the themes defined in CSS
         const themes = [
-            { id: "dark", name: "Dark" },
             { id: "light", name: "Light" },
+            { id: "dark", name: "Dark" },
             { id: "terminal", name: "Terminal" },
             { id: "sunset", name: "Sunset" }
         ];
