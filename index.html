@@ -216,11 +216,19 @@
             outline-offset: 2px;
         }
 
-        .theme-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
+        .theme-icon {
+            display: none;
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        /* Show only the icon of the current theme */
+        [data-theme="light"] .theme-icon-light,
+        [data-theme="dark"] .theme-icon-dark,
+        [data-theme="terminal"] .theme-icon-terminal,
+        [data-theme="sunset"] .theme-icon-sunset {
+            display: block;
         }
 
         .hero {
@@ -399,7 +407,27 @@
                     <a href="#contact">Contact</a>
                 </div>
                 <button class="theme-toggle" id="theme-toggle" type="button">
-                    <span class="theme-dot" aria-hidden="true"></span>
+                    <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="currentColor"
+                        aria-hidden="true">
+                        <circle cx="12" cy="12" r="7" />
+                    </svg>
+                    <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <mask id="moon-mask">
+                            <rect width="24" height="24" fill="#fff" />
+                            <circle cx="17" cy="8" r="7" fill="#000" />
+                        </mask>
+                        <circle cx="12" cy="12" r="9" mask="url(#moon-mask)" />
+                    </svg>
+                    <svg class="theme-icon theme-icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 7l5 5-5 5M12 19h8" />
+                    </svg>
+                    <svg class="theme-icon theme-icon-sunset" viewBox="0 0 24 24" fill="currentColor"
+                        aria-hidden="true">
+                        <path d="M4 16a8 8 0 0 1 16 0z" />
+                        <rect x="1" y="18" width="22" height="2" rx="1" />
+                        <rect x="6" y="21.5" width="12" height="1.5" rx=".75" />
+                    </svg>
                 </button>
             </div>
         </div>
