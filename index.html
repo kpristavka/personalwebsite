@@ -378,6 +378,31 @@
             }
         }
 
+        @media (prefers-reduced-motion: no-preference) {
+            .theme-icon-light {
+                animation: eye-blink 9s infinite;
+            }
+        }
+
+        @keyframes eye-blink {
+
+            0%,
+            40%,
+            43%,
+            92%,
+            94.5%,
+            97%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            41.5%,
+            93.25%,
+            95.75% {
+                transform: scaleY(.1);
+            }
+        }
+
         @media (max-width: 750px) {
             .navlinks {
                 display: none;
@@ -409,7 +434,13 @@
                 <button class="theme-toggle" id="theme-toggle" type="button">
                     <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="currentColor"
                         aria-hidden="true">
-                        <circle cx="12" cy="12" r="7" />
+                        <mask id="eye-mask">
+                            <rect width="24" height="24" fill="#fff" />
+                            <circle cx="12" cy="12" r="5" fill="#000" />
+                        </mask>
+                        <path d="M1 12C4 6.5 7.5 4.5 12 4.5S20 6.5 23 12C20 17.5 16.5 19.5 12 19.5S4 17.5 1 12z"
+                            mask="url(#eye-mask)" />
+                        <circle cx="12" cy="12" r="3" />
                     </svg>
                     <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <mask id="moon-mask">
