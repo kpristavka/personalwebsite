@@ -288,30 +288,59 @@
             margin-bottom: 35px;
         }
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(280px, 1fr));
+        .accordion {
+            border-top: 1px solid var(--border-card);
+        }
+
+        .accordion details {
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .accordion summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 18px;
+            padding: 20px 0;
+            cursor: pointer;
+            list-style: none;
         }
 
-        .card {
-            padding: 25px;
-            background: var(--surface);
-            border: 1px solid var(--border-card);
-            border-radius: 20px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+        .accordion summary::-webkit-details-marker {
+            display: none;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            border-color: var(--text-subtle);
+        .accordion summary::after {
+            content: "";
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid var(--text-subtle);
+            border-bottom: 2px solid var(--text-subtle);
+            transform: rotate(-45deg);
         }
 
-        .card h3 {
-            margin-top: 0;
+        .accordion details[open] summary::after {
+            transform: rotate(45deg);
         }
 
-        .card p {
+        .accordion summary:hover::after {
+            border-color: var(--text-hover);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .accordion summary::after {
+                transition: transform 0.2s ease;
+            }
+        }
+
+        .accordion h3 {
+            margin: 0;
+        }
+
+        .accordion p {
+            margin: 0;
+            padding-bottom: 22px;
             color: var(--text-card);
             font-size: 14px;
         }
@@ -412,10 +441,6 @@
                 display: none;
             }
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
             .hero {
                 padding-top: 80px;
             }
@@ -474,37 +499,43 @@
             <div class="eyebrow">Konstantin Pristavka</div>
             <h1>Hi, I'm Kon. I built web portals that you've most likely used.</h1>
             <p>
-                I do APIs, Web, Databases, Data cleansing and all sorts of business systems development. I built AI
-                agents with LangChain. I understand outputs of your LLM. I live in Melbourne.
+                I do APIs, Web, Databases, Data cleansing and all sorts of business systems development. I understand outputs of your LLM. I live in Melbourne.
             </p>
         </header>
 
         <section id="work">
             <div class="container">
                 <div class="section-title">I do</div>
-                <div class="cards">
-                    <article class="card">
-                        <h3>Enterprise Integration</h3>
+                <div class="accordion">
+                    <details open>
+                        <summary>
+                            <h3>Enterprise Integration</h3>
+                        </summary>
                         <p>APIs, Web Services; Postman/SOAP UI; Message Oriented Middleware; Data cleansing, Data
                             validation</p>
-                    </article>
-                    <article class="card">
-                        <h3>Responsive and Accessible Web</h3>
-                        <p>Angular, Typescript, JavaScript, styling; JSON
-                            Objects/REST APIs. XML based technologies: XSLT, XSD, XPath, Xquery.</p>
-                    </article>
-                    <article class="card">
-                        <h3>Databases</h3>
+                    </details>
+                    <details open>
+                        <summary>
+                            <h3>Responsive and Accessible Web</h3>
+                        </summary>
+                        <p>Angular, React, Typescript, JavaScript, styling; JSON, REST APIs.</p>
+                    </details>
+                    <details open>
+                        <summary>
+                            <h3>Databases</h3>
+                        </summary>
                         <p>Data Modeling. T-SQL, PL/SQL, database programming, stored procedures. Oracle/MS SQL
                             databases:
                             performance evaluation &amp; optimization; SQL tuning/Execution Plans</p>
-                    </article>
-                    <article class="card">
-                        <h3>Oracle Siebel</h3>
+                    </details>
+                    <details open>
+                        <summary>
+                            <h3>Oracle Siebel</h3>
+                        </summary>
                         <p>I did Siebel for enterprises. Everything from integration and back end (data validation,
                             transformation, internal automation with best practices) to front end/Open
                             UI/JavaScript/Web/Styling. Versions starting from v7 up to Continuous Release Model</p>
-                    </article>
+                    </details>
                 </div>
             </div>
         </section>
