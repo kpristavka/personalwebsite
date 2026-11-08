@@ -391,7 +391,7 @@
 
         @media (prefers-reduced-motion: no-preference) {
             .cursor {
-                animation: blink 0.8s infinite;
+                animation: blink 0.9s infinite;
             }
         }
 
@@ -566,36 +566,8 @@
     <script>
         const element = document.getElementById("typewriter");
         const text = "</>";
-        let index = 0;
-        let isDeleting = false;
 
-        function typeLoop() {
-            // Update text based on direction
-            if (isDeleting) {
-                element.textContent = text.substring(0, index - 1);
-                index--;
-            } else {
-                element.textContent = text.substring(0, index + 1);
-                index++;
-            }
-
-            // Determine speed (faster when deleting)
-            let speed = isDeleting ? 150 : 300;
-
-            // Handle phase changes
-            if (!isDeleting && index === text.length) {
-                speed = 3000; // Pause when fully typed
-                isDeleting = true;
-            } else if (isDeleting && index === 0) {
-                speed = 500; // Pause when fully erased
-                isDeleting = false;
-            }
-
-            setTimeout(typeLoop, speed);
-        }
-
-        // Start the loop
-        typeLoop();
+        element.textContent = text;
         document.getElementById("year").textContent = new Date().getFullYear();
 
         // Theme switcher: cycles through the themes defined in CSS
