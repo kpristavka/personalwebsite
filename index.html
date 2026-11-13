@@ -50,8 +50,6 @@
             --text-subtle: #5f6878;
             --text-faint: #6b7385;
             --accent: #3396D3;
-            --glow-1: rgb(255 240 206 / 16%);
-            --glow-2: rgb(235 203 144 / 18%);
         }
 
         [data-theme="dark"] {
@@ -70,8 +68,6 @@
             --text-subtle: #8f99ad;
             --text-faint: #737d90;
             --accent: #8ea2ff;
-            --glow-1: rgba(14, 165, 233, 0.15);
-            --glow-2: rgba(168, 85, 247, 0.12);
         }
 
         [data-theme="terminal"] {
@@ -90,8 +86,6 @@
             --text-subtle: #6fa07a;
             --text-faint: #5e8a68;
             --accent: #3ddc84;
-            --glow-1: rgba(61, 220, 132, 0.12);
-            --glow-2: rgba(20, 184, 166, 0.10);
         }
 
         [data-theme="sunset"] {
@@ -110,8 +104,6 @@
             --text-subtle: #a8968a;
             --text-faint: #8a7a70;
             --accent: #ff9e64;
-            --glow-1: rgba(249, 115, 22, 0.14);
-            --glow-2: rgba(236, 72, 153, 0.12);
         }
 
         * {
@@ -136,18 +128,6 @@
         a {
             color: inherit;
             text-decoration: none;
-        }
-
-        /* Fixed ambient glow container behind everything */
-        .bg-gradient-wrapper {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            pointer-events: none;
-            background:
-                radial-gradient(circle at 20% 20%, var(--glow-1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, var(--glow-2) 0%, transparent 40%);
-            filter: blur(80px);
         }
 
         .container {
@@ -449,7 +429,6 @@
 </head>
 
 <body>
-    <div class="bg-gradient-wrapper"></div>
     <nav>
         <div class="container">
             <a class="logo" href="#about" aria-label="Home"><span id="typewriter" aria-hidden="true"></span><span
@@ -472,12 +451,10 @@
                             stroke-width="1" />
                         <circle cx="12" cy="12" r="6" clip-path="url(#eyelid-clip)" />
                     </svg>
-                    <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <mask id="moon-mask">
-                            <rect width="24" height="24" fill="#fff" />
-                            <circle cx="17" cy="8" r="7" fill="#000" />
-                        </mask>
-                        <circle cx="12" cy="12" r="9" mask="url(#moon-mask)" />
+                    <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                        <path d="M2 8c3 4 6.5 5.5 10 5.5S19 12 22 8" />
+                        <path d="M5.2 11.2 3.8 13.6M9.2 13.1l-.6 2.6M14.8 13.1l.6 2.6M18.8 11.2l1.4 2.4" />
                     </svg>
                     <svg class="theme-icon theme-icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
