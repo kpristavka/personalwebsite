@@ -173,6 +173,33 @@
             color: var(--text-hover);
         }
 
+        .local-time {
+            color: var(--text-muted);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .local-time-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 2px;
+            vertical-align: -2px;
+        }
+
+        .local-time strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .local-time time {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .local-time .utc {
+            color: var(--text-faint);
+            font-size: 12px;
+        }
+
         .theme-toggle {
             display: inline-flex;
             align-items: center;
@@ -365,13 +392,6 @@
             color: var(--text-hover);
         }
 
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 25px 0;
-            color: var(--text-faint);
-            font-size: 13px;
-        }
-
         .cursor {
             font-weight: bold;
         }
@@ -441,6 +461,15 @@
             <a class="logo" href="#about" aria-label="Home"><span id="typewriter" aria-hidden="true"></span><span
                     class="cursor" aria-hidden="true">|</span></a>
             <div class="nav-right">
+                <div class="local-time" id="local-time">
+                    <svg class="local-time-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+                        <circle cx="12" cy="9.5" r="2.5" />
+                    </svg>
+                    <strong>St Kilda</strong> <time id="local-time-value">--:--</time> <span class="utc"
+                        id="local-time-utc"></span>
+                </div>
                 <div class="navlinks">
                     <a href="#about">About</a>
                     <a href="#work">Tech</a>
@@ -552,16 +581,11 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">© <span id="year"></span> Konstantin Pristavka.</div>
-    </footer>
-
     <script>
         const element = document.getElementById("typewriter");
         const text = "</>";
 
         element.textContent = text;
-        document.getElementById("year").textContent = new Date().getFullYear();
 
         // Theme switcher: cycles through the themes defined in CSS
         const themes = [
@@ -589,6 +613,35 @@
         });
 
         applyTheme(document.documentElement.dataset.theme);
+
+        // Local time in St Kilda, Melbourne (follows daylight saving)
+        const timeZone = "Australia/Melbourne";
+        const timeFormat = new Intl.DateTimeFormat("en-GB", { timeZone, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+        const partsFormat = new Intl.DateTimeFormat("en-US", {
+            timeZone, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit",
+            hour: "2-digit", minute: "2-digit"
+        });
+
+        function utcOffset(date) {
+            const p = {};
+            partsFormat.formatToParts(date).forEach(x => p[x.type] = x.value);
+            const local = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute);
+            const minutes = Math.round((local - Math.floor(date.getTime() / 60000) * 60000) / 60000);
+            const h = Math.floor(Math.abs(minutes) / 60), m = Math.abs(minutes) % 60;
+            return "UTC" + (minutes < 0 ? "-" : "+") + h + (m ? ":" + String(m).padStart(2, "0") : "");
+        }
+
+        function updateLocalTime() {
+            const now = new Date();
+            const utc = utcOffset(now);
+            document.getElementById("local-time-value").textContent = timeFormat.format(now);
+            document.getElementById("local-time-utc").textContent = utc;
+            document.getElementById("local-time").title = "Local time in St Kilda, Melbourne (" + utc + ")";
+            // Re-run right after the next minute starts
+            setTimeout(updateLocalTime, 60000 - (now.getTime() % 60000) + 50);
+        }
+
+        updateLocalTime();
     </script>
 
 </body>
